@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Persistence.Repositories;
 
-public interface IAsyncRepository<TEntity, TEntityId>: IQuery<TEntity>
+public interface IAsyncRepository<TEntity, TEntityId> : IQuery<TEntity>
         where TEntity : Entity<TEntityId>
 {
     Task<TEntity?> GetAsync(
@@ -27,6 +27,7 @@ public interface IAsyncRepository<TEntity, TEntityId>: IQuery<TEntity>
        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
        int index = 0,
        int size = 10,
+       bool withDeleted = false,
        bool enableTracking = true,
        CancellationToken cancellationToken = default
    );
@@ -37,25 +38,27 @@ public interface IAsyncRepository<TEntity, TEntityId>: IQuery<TEntity>
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
         int index = 0,
         int size = 10,
+        bool withDeleted = false,
         bool enableTracking = true,
         CancellationToken cancellationToken = default
     );
 
     Task<bool> AnyAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
+        bool withDeleted = false,
         bool enableTracking = true,
         CancellationToken cancellationToken = default
     );
 
     Task<TEntity> AddAsync(TEntity entity);
 
-    Task<IList<TEntity>> AddRangeAsync(IList<TEntity> entity);
+    Task<IList<TEntity>> AddRangeAsync(IList<TEntity> entities);
 
     Task<TEntity> UpdateAsync(TEntity entity);
 
-    Task<IList<TEntity>> UpdateRangeAsync(IList<TEntity> entity);
+    Task<IList<TEntity>> UpdateRangeAsync(IList<TEntity> entities);
 
-    Task<TEntity> DeleteAsync(TEntity entity);
+    Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false);
 
-    Task<IList<TEntity>> DeleteRangeAsync(IList<TEntity> entity);
+    Task<IList<TEntity>> DeleteRangeAsync(IList<TEntity> entities, bool permanent = false);
 }
