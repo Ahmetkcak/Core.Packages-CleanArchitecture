@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Application.Pipelines.Lgging;
+namespace Core.Application.Pipelines.Logging;
 
 public interface ILoggableRequest
 {

@@ -1,4 +1,4 @@
-﻿using Core.CrossCuttingConcerns.Loging;
+﻿using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Serilog;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Core.Application.Pipelines.Lgging;
+namespace Core.Application.Pipelines.Logging;
 
 public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>, ILoggableRequest
