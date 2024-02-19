@@ -24,5 +24,3 @@ public class OperationClaim:Entity<int>
         Name = name;
     }
 }
-{
-}
